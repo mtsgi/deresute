@@ -9,7 +9,8 @@ PFont myFont, smallFont;
 
 String gameID = "", status = "入力を待っています";
 String Pname = "名無し", comment = "よろしくお願いします！";
-int PLv = 999, PRP = 9999, fan, album, commu ;
+String version = "ver1.0.2";
+int PLv = 0, PRP = 0, fan, album, commu ;
 Date cDate = new Date(0), lDate = new Date(0);
 NumberFormat numFormat = NumberFormat.getNumberInstance();
 
@@ -41,6 +42,7 @@ void draw() {
   text("Enterキーで取得を開始します", 20, 62);
   text("✕", 560, 99);
   text(status, 20, 385);
+  text(version, 520, 385);
   text("Lv" + PLv, 20, 143);
   text("PRP" + PRP, 510, 143);
   text(comment, 20, 173);
