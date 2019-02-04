@@ -7,9 +7,9 @@ import java.util.Date;
 import java.time.Instant;
 PFont myFont, smallFont;
 
-String gameID = "", status = "入力を待っています";
+String gameID = "", status = "入力を待っています", tld = "me";
 String Pname = "名無し", comment = "よろしくお願いします！";
-String version = "ver1.0.2";
+String server = "deresute", version = "ver1.0.3";
 int PLv = 0, PRP = 0, fan, album, commu ;
 Date cDate = new Date(0), lDate = new Date(0);
 NumberFormat numFormat = NumberFormat.getNumberInstance();
@@ -70,7 +70,7 @@ void mouseClicked(){
 }
 void getData(String gameID) {
   status = "データを取得しています...";
-  GetRequest get = new GetRequest("https://deresute.me/"+gameID+"/json");
+  GetRequest get = new GetRequest("https://"+server+"."+tld+"/"+gameID+"/json");
   try {
     get.send();
     JSONObject result = parseJSONObject(get.getContent());
