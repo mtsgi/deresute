@@ -9,7 +9,7 @@ PFont myFont, smallFont;
 
 String gameID = "", status = "入力を待っています", tld = "me";
 String Pname = "名無し", comment = "よろしくお願いします！";
-String server = "deresute", version = "ver1.1.0", ai = "0";
+String server = "deresute", version = "ver1.1.2", ai = "0";
 String imgDB = "hidamarirhodonite.kirara", imgDBdir = "icon_card/";
 String imgDBtld = "ca", centerID = "200133";
 PImage centerImg;
@@ -55,6 +55,8 @@ void draw() {
   text("最終ログイン:" + new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(lDate), 20, 245);
   text("合計ファン数:" + numFormat.format(fan) + "人", 20, 270);
   text("アルバム登録数:" + album, 20, 295);
+  
+  text("♡" + ai, 470, 305);
 
   line(20, 190, 580, 190);
   
@@ -90,6 +92,7 @@ void getData(String gameID) {
     album = result.getInt("album_no");
     commu = result.getInt("commu_no");
     centerID = String.valueOf(result.getJSONObject("leader_card").getInt("id"));
+    ai = String.valueOf(result.getJSONObject("leader_card").getInt("love"));
     centerImg = loadImage("https://hidamarirhodonite.kirara.ca/icon_card/"+centerID+".png","png");
   }
   catch (RuntimeException e) {
