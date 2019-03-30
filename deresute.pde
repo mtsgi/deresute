@@ -9,7 +9,10 @@ PFont myFont, smallFont;
 
 String gameID = "", status = "入力を待っています", tld = "me";
 String Pname = "名無し", comment = "よろしくお願いします！";
-String server = "deresute", version = "ver1.0.3";
+String server = "deresute", version = "ver1.1.0", ai = "0";
+String imgDB = "hidamarirhodonite.kirara", imgDBdir = "icon_card/";
+String imgDBtld = "ca", centerID = "200133";
+PImage centerImg;
 int PLv = 0, PRP = 0, fan, album, commu ;
 Date cDate = new Date(0), lDate = new Date(0);
 NumberFormat numFormat = NumberFormat.getNumberInstance();
@@ -25,6 +28,7 @@ void setup() {
     myFont = createFont("YuGothic", 20, true);
     smallFont = createFont("YuGothic", 15, true);
   }
+  centerImg = loadImage("https://"+imgDB+"."+imgDBtld+"/"+imgDBdir+centerID+".png","png");
 }
 
 void draw() {
@@ -51,9 +55,10 @@ void draw() {
   text("最終ログイン:" + new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(lDate), 20, 245);
   text("合計ファン数:" + numFormat.format(fan) + "人", 20, 270);
   text("アルバム登録数:" + album, 20, 295);
-  text("コミュ達成数:" + commu, 20, 320);
 
   line(20, 190, 580, 190);
+  
+  image(centerImg,460,160);
 }
 
 void keyPressed() {
@@ -84,6 +89,8 @@ void getData(String gameID) {
     lDate = Date.from( Instant.ofEpochSecond( result.getInt("last_login_ts") ) );
     album = result.getInt("album_no");
     commu = result.getInt("commu_no");
+    centerID = String.valueOf(result.getJSONObject("leader_card").getInt("id"));
+    centerImg = loadImage("https://hidamarirhodonite.kirara.ca/icon_card/"+centerID+".png","png");
   }
   catch (RuntimeException e) {
     status = "データを取得できませんでした";
