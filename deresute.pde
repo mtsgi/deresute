@@ -9,9 +9,9 @@ PFont myFont, smallFont;
 
 String gameID = "", status = "入力を待っています", tld = "me";
 String Pname = "名無し", comment = "よろしくお願いします！";
-String server = "deresute", version = "ver1.1.2", ai = "0";
+String server = "deresute", version = "ver1.1.3", ai = "0";
 String imgDB = "hidamarirhodonite.kirara", imgDBdir = "icon_card/";
-String imgDBtld = "ca", centerID = "200133";
+String imgDBtld = "ca", centerID = "200133", centerLv = "1";
 PImage centerImg;
 int PLv = 0, PRP = 0, fan, album, commu ;
 Date cDate = new Date(0), lDate = new Date(0);
@@ -56,11 +56,12 @@ void draw() {
   text("合計ファン数:" + numFormat.format(fan) + "人", 20, 270);
   text("アルバム登録数:" + album, 20, 295);
   
-  text("♡" + ai, 470, 305);
+  text("♡" + ai, 470, 345);
+  text("Lv" + centerLv, 520, 345);
 
   line(20, 190, 580, 190);
   
-  image(centerImg,460,160);
+  image(centerImg,460,200);
 }
 
 void keyPressed() {
@@ -93,6 +94,7 @@ void getData(String gameID) {
     commu = result.getInt("commu_no");
     centerID = String.valueOf(result.getJSONObject("leader_card").getInt("id"));
     ai = String.valueOf(result.getJSONObject("leader_card").getInt("love"));
+    centerLv = String.valueOf(result.getJSONObject("leader_card").getInt("level"));
     centerImg = loadImage("https://hidamarirhodonite.kirara.ca/icon_card/"+centerID+".png","png");
   }
   catch (RuntimeException e) {
